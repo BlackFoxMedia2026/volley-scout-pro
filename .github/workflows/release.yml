@@ -1,0 +1,71 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-latest
+            target: aarch64-apple-darwin
+          - platform: macos-13
+            target: x86_64-apple-darwin
+          - platform: windows-latest
+            target: x86_64-pc-windows-msvc
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: 'VolleyScoutPro ${{ github.ref_name }}'
+          releaseBody: |
+            ## VolleyScoutPro ${{ github.ref_name }}
+
+            ### Download
+            - **Mac Apple Silicon (M1/M2/M3)**: scarica `VolleyScoutPro_*_aarch64.dmg`
+            - **Mac Intel**: scarica `VolleyScoutPro_*_x64.dmg`
+            - **Windows 10/11**: scarica `VolleyScoutPro_*_x64-setup.exe`
+
+            ### Installazione Mac
+            Apri il .dmg, trascina VolleyScoutPro nella cartella Applicazioni.
+            Al primo avvio: **tasto destro → Apri** (richiesto solo la prima volta).
+
+            ### Installazione Windows
+            Esegui il file .exe e segui le istruzioni guidate.
+
+            ### Dati
+            I dati vengono salvati localmente sul computer. Nessun dato viene trasmesso a server esterni.
+          releaseDraft: false
+          prerelease: false
+          args: --target ${{ matrix.target }}
