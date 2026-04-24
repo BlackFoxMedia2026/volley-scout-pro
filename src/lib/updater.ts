@@ -1,5 +1,5 @@
 const REPO = 'BlackFoxMedia2026/volley-scout-pro';
-export const CURRENT_VERSION = '0.1.2';
+export const CURRENT_VERSION = '0.1.3';
 
 export interface UpdateInfo {
   version: string;
