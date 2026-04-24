@@ -12,6 +12,7 @@ import { FormationSetupView } from '@/components/setup/FormationSetupView';
 import { ConfigEditor } from '@/components/config/ConfigEditor';
 import { TeamsView } from '@/components/teams/TeamsView';
 import { UpdatesView } from '@/components/updates/UpdatesView';
+import { SplashScreen } from '@/components/splash/SplashScreen';
 import '@/styles/app.css';
 import '@/styles/config.css';
 import '@/styles/formation.css';
@@ -24,6 +25,7 @@ export function App() {
   const { init: initConfig } = useConfigStore();
   const { view, matchId, navigate, back } = useNav<AppView>();
   const [update, setUpdate] = useState<UpdateInfo | null>(null);
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => { init(); }, [init]);
   useEffect(() => {
@@ -93,6 +95,7 @@ export function App() {
     default:
       return (
         <>
+          {showSplash && <SplashScreen onClose={() => setShowSplash(false)} />}
           {update && (
             <div className="update-banner">
               <span>🆕 Nuova versione disponibile: <strong>{update.version}</strong></span>

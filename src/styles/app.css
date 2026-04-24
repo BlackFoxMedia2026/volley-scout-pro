@@ -1361,3 +1361,148 @@ kbd {
 }
 .updates-info-title { font-size: .9rem; font-weight: 700; margin: 0 0 .6rem; color: var(--text-muted); }
 .updates-info-list { margin: 0; padding-left: 1.2rem; color: var(--text-muted); font-size: .85rem; display: flex; flex-direction: column; gap: .4rem; }
+
+/* ─── Splash screen ─────────────────────────── */
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0,0,0,.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn .25s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.splash-modal {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: .75rem;
+  width: 420px;
+  max-width: calc(100vw - 2rem);
+  box-shadow: 0 24px 64px rgba(0,0,0,.7);
+  overflow: hidden;
+  animation: slideDown .3s ease;
+}
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+.splash-logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 2rem 1.5rem;
+  gap: .5rem;
+}
+.splash-logo {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #1a3a6e, #5ba0ff);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(91,160,255,.3);
+  margin-bottom: .5rem;
+}
+.splash-logo__vsp {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -.02em;
+}
+.splash-app-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0;
+  color: var(--text);
+}
+.splash-tagline {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin: 0;
+  text-align: center;
+}
+.splash-version {
+  font-size: .75rem;
+  color: var(--text-muted);
+  background: var(--bg-hover);
+  padding: .15rem .6rem;
+  border-radius: 1rem;
+  font-family: var(--font-mono);
+}
+.splash-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+.splash-company {
+  padding: 1.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.splash-company__name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.splash-company__desc {
+  font-size: .82rem;
+  color: var(--text-muted);
+  margin-bottom: .25rem;
+}
+.splash-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+.splash-contact-row {
+  display: flex;
+  gap: .75rem;
+  font-size: .83rem;
+}
+.splash-contact-label {
+  color: var(--text-muted);
+  width: 70px;
+  flex-shrink: 0;
+}
+.splash-contact-value {
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: .8rem;
+}
+.splash-support-note {
+  font-size: .78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-top: .25rem;
+  padding: .6rem .75rem;
+  background: var(--bg-hover);
+  border-radius: .35rem;
+  border-left: 2px solid var(--border);
+}
+.splash-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: var(--bg);
+}
+.splash-copyright {
+  font-size: .75rem;
+  color: var(--text-muted);
+}
+.splash-close-btn {
+  padding: .5rem 1.5rem;
+  background: #5ba0ff;
+  color: #fff;
+  border: none;
+  border-radius: .4rem;
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .12s;
+}
+.splash-close-btn:hover { opacity: .85; }
