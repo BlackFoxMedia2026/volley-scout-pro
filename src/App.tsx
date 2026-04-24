@@ -11,12 +11,13 @@ import { ScoutingView } from '@/components/scouting/ScoutingView';
 import { FormationSetupView } from '@/components/setup/FormationSetupView';
 import { ConfigEditor } from '@/components/config/ConfigEditor';
 import { TeamsView } from '@/components/teams/TeamsView';
+import { UpdatesView } from '@/components/updates/UpdatesView';
 import '@/styles/app.css';
 import '@/styles/config.css';
 import '@/styles/formation.css';
 import '@/styles/teams.css';
 
-type AppView = 'home' | 'new_match' | 'import_dvw' | 'scouting' | 'formation_setup' | 'config' | 'teams';
+type AppView = 'home' | 'new_match' | 'import_dvw' | 'scouting' | 'formation_setup' | 'config' | 'teams' | 'updates';
 
 export function App() {
   const { isBootstrapped, isLoading, orgId, seasonId, init } = useAppStore();
@@ -47,6 +48,7 @@ export function App() {
       onConfig={() => navigate('config')}
       onTeams={() => navigate('teams')}
       onImport={() => navigate('import_dvw')}
+      onUpdates={() => navigate('updates')}
     />
   );
 
@@ -68,6 +70,9 @@ export function App() {
 
     case 'teams':
       return <TeamsView onClose={back} />;
+
+    case 'updates':
+      return <UpdatesView onClose={back} />;
 
     case 'new_match':
       return (

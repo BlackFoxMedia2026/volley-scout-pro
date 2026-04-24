@@ -1,11 +1,15 @@
 const REPO = 'BlackFoxMedia2026/volley-scout-pro';
-const CURRENT_VERSION = '0.1.2';
+export const CURRENT_VERSION = '0.1.2';
 
 export interface UpdateInfo {
   version: string;
   releaseUrl: string;
   body: string;
   publishedAt: string;
+}
+
+export interface ReleaseInfo extends UpdateInfo {
+  isNewer: boolean;
 }
 
 function semverGt(a: string, b: string): boolean {
@@ -33,6 +37,27 @@ export async function checkForUpdate(): Promise<UpdateInfo | null> {
       releaseUrl: data.html_url,
       body: data.body ?? '',
       publishedAt: data.published_at ?? '',
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchLatestRelease(): Promise<ReleaseInfo | null> {
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${REPO}/releases/latest`,
+      { headers: { Accept: 'application/vnd.github+json' } }
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    const latest: string = data.tag_name ?? '';
+    return {
+      version: latest,
+      releaseUrl: data.html_url,
+      body: data.body ?? '',
+      publishedAt: data.published_at ?? '',
+      isNewer: semverGt(latest, CURRENT_VERSION),
     };
   } catch {
     return null;
