@@ -14,7 +14,7 @@ export function SplashScreen({ onClose }: Props) {
           </div>
           <h1 className="splash-app-name">VolleyScoutPro</h1>
           <p className="splash-tagline">Software professionale di scouting pallavolo</p>
-          <div className="splash-version">Versione 0.1.4</div>
+          <div className="splash-version">Versione 0.1.5</div>
         </div>
 
         <div className="splash-divider" />

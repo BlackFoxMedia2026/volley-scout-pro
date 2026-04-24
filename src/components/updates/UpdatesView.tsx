@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { open } from '@tauri-apps/plugin-shell';
 import { CURRENT_VERSION, fetchLatestRelease, type ReleaseInfo } from '@/lib/updater';
 
 interface Props {
@@ -22,6 +23,14 @@ export function UpdatesView({ onClose }: Props) {
       setState('done');
     } catch {
       setState('error');
+    }
+  };
+
+  const handleDownload = async (url: string) => {
+    try {
+      await open(url);
+    } catch {
+      window.location.href = url;
     }
   };
 
@@ -92,11 +101,22 @@ export function UpdatesView({ onClose }: Props) {
         {state === 'done' && release?.isNewer && (
           <div className="updates-release-card">
             <div className="updates-release-card__header">
-              <div className="updates-release-badge">Aggiornamento disponibile</div>
-              <div className="updates-release-version">{release.version}</div>
-              {release.publishedAt && (
-                <div className="updates-release-date">Rilasciato il {formatDate(release.publishedAt)}</div>
-              )}
+              <div className="updates-release-top-row">
+                <div>
+                  <div className="updates-release-badge">Aggiornamento disponibile</div>
+                  <div className="updates-release-version">{release.version}</div>
+                  {release.publishedAt && (
+                    <div className="updates-release-date">Rilasciato il {formatDate(release.publishedAt)}</div>
+                  )}
+                </div>
+                <button
+                  className="updates-download-btn"
+                  onClick={() => handleDownload(release.releaseUrl)}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                  Scarica {release.version}
+                </button>
+              </div>
             </div>
 
             {release.body && (
@@ -106,18 +126,9 @@ export function UpdatesView({ onClose }: Props) {
               </div>
             )}
 
-            <div className="updates-release-actions">
-              <button
-                className="updates-download-btn"
-                onClick={() => window.open(release.releaseUrl, '_blank')}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                Scarica {release.version}
-              </button>
-              <div className="updates-install-note">
-                Scarica il file per il tuo sistema operativo e seguì le istruzioni di installazione.
-                I dati esistenti vengono conservati.
-              </div>
+            <div className="updates-install-note">
+              Scarica il file per il tuo sistema operativo e installalo sopra la versione esistente.
+              I dati esistenti vengono conservati.
             </div>
           </div>
         )}

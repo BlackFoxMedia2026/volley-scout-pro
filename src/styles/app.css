@@ -1311,6 +1311,13 @@ kbd {
   background: #0d2b1e;
   border-bottom: 1px solid #27ae60;
 }
+.updates-release-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
 .updates-release-badge {
   display: inline-block;
   background: #27ae60;
@@ -1334,27 +1341,27 @@ kbd {
   white-space: pre-wrap;
   word-break: break-word;
   margin: 0;
-  max-height: 200px;
+  max-height: 100px;
   overflow-y: auto;
 }
-.updates-release-actions { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: .75rem; }
 .updates-download-btn {
   display: flex;
   align-items: center;
   gap: .5rem;
-  padding: .75rem 1.5rem;
+  padding: .75rem 1.25rem;
   background: #27ae60;
   color: #fff;
   border: none;
   border-radius: .4rem;
-  font-size: .95rem;
+  font-size: .9rem;
   font-weight: 700;
   cursor: pointer;
-  width: fit-content;
+  white-space: nowrap;
+  flex-shrink: 0;
   transition: opacity .12s;
 }
 .updates-download-btn:hover { opacity: .85; }
-.updates-install-note { font-size: .82rem; color: var(--text-muted); line-height: 1.5; }
+.updates-install-note { font-size: .82rem; color: var(--text-muted); line-height: 1.5; padding: .75rem 1.5rem; }
 .updates-info-section {
   border-top: 1px solid var(--border);
   padding-top: 1rem;
