@@ -1,0 +1,127 @@
+/* ─── Formation grid ─────────────────────────── */
+.formation-grid {
+  background: var(--bg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.formation-grid__title { margin: 0; font-size: 1.1rem; font-weight: 700; }
+.formation-grid__errors {
+  background: #3b0404;
+  border: 1px solid var(--q-error);
+  border-radius: .3rem;
+  padding: .5rem .75rem;
+  margin: 0;
+  font-size: .82rem;
+  color: var(--q-error);
+  list-style: disc;
+  list-style-position: inside;
+}
+.formation-grid__actions { display: flex; gap: .5rem; justify-content: flex-end; }
+
+/* ─── Court diagram ─────────────────────────── */
+.court-diagram { display: flex; flex-direction: column; gap: .3rem; }
+.court-diagram__net {
+  text-align: center;
+  font-size: .65rem;
+  color: var(--text-muted);
+  letter-spacing: .2em;
+  padding: .2rem;
+  border-top: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+}
+.court-diagram__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: .4rem;
+  background: #0a1020;
+  border: 1px solid var(--border);
+  border-radius: .4rem;
+  padding: .5rem;
+  aspect-ratio: 3/2;
+}
+.court-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+  border-radius: .3rem;
+  border: 2px solid var(--border);
+  background: var(--bg-surface);
+  cursor: pointer;
+  font-family: var(--font-ui);
+  color: var(--text);
+  transition: border-color .12s, background .12s;
+  padding: .3rem;
+}
+.court-cell--selected { border-color: var(--home); background: #1a3b6e; }
+.court-cell--filled   { border-color: #374151; background: #111827; }
+.court-cell--empty:hover { border-color: var(--home); }
+.court-cell__pos  { font-size: .65rem; color: var(--text-muted); }
+.court-cell__number { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; }
+.court-cell__name { font-size: .72rem; }
+.court-cell__empty-label { font-size: .8rem; color: var(--text-muted); }
+
+/* ─── Formation roster ──────────────────────── */
+.formation-roster {
+  border: 1px solid var(--border);
+  border-radius: .4rem;
+  overflow: hidden;
+}
+.formation-roster__hint {
+  padding: .4rem .75rem;
+  font-size: .78rem;
+  color: var(--text-muted);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+}
+.formation-roster__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: .3rem;
+  padding: .4rem;
+  max-height: 160px;
+  overflow-y: auto;
+  background: var(--bg);
+}
+.roster-btn {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .3rem .5rem;
+  border-radius: .25rem;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  cursor: pointer;
+  font-family: var(--font-ui);
+  color: var(--text);
+  font-size: .8rem;
+  transition: background .1s;
+}
+.roster-btn:hover:not(:disabled) { background: var(--bg-hover); border-color: var(--home); }
+.roster-btn--assigned { opacity: .4; }
+.roster-btn--libero { border-color: #7c3aed; }
+.roster-btn__number { font-family: var(--font-mono); font-weight: 700; min-width: 2ch; }
+.roster-btn__name { flex: 1; }
+.roster-btn__role { font-size: .68rem; color: var(--text-muted); }
+
+/* ─── Formation meta (setter / libero) ──────── */
+.formation-meta {
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+.formation-meta__field {
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  font-size: .8rem;
+  color: var(--text-muted);
+  flex: 1;
+  min-width: 160px;
+}

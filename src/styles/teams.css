@@ -1,0 +1,197 @@
+/* ─────────────────────────────────────────────
+   Teams & Players management view
+   ───────────────────────────────────────────── */
+
+.teams-view {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.teams-view__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.5rem;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.teams-view__title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.teams-view__body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  overflow: hidden;
+}
+
+/* ─── Sidebar ───────────────────────────────── */
+.teams-view__sidebar {
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.teams-view__sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem .75rem;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.teams-view__team-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.teams-view__team-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: .55rem .75rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: .85rem;
+  font-family: var(--font-ui);
+  text-align: left;
+  cursor: pointer;
+  transition: background .1s;
+}
+
+.teams-view__team-item:hover { background: var(--bg-hover); }
+.teams-view__team-item--active { background: var(--bg-hover); color: var(--home); }
+
+.teams-view__team-badge {
+  font-size: .7rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ─── Main panel ────────────────────────────── */
+.teams-view__main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.teams-view__main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.teams-view__subtitle {
+  font-size: .9rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.teams-view__empty {
+  padding: 2rem;
+  color: var(--text-muted);
+  font-size: .85rem;
+  text-align: center;
+}
+
+/* ─── Player table ──────────────────────────── */
+.player-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .82rem;
+}
+
+.player-table thead th {
+  text-align: left;
+  padding: .4rem .75rem;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg-surface);
+}
+
+.player-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background .1s;
+}
+
+.player-table tbody tr:hover { background: var(--bg-hover); }
+.player-table__row--libero { background: color-mix(in srgb, #7c3aed 8%, transparent); }
+
+.player-table td { padding: .45rem .75rem; vertical-align: middle; }
+
+.player-table__number {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  width: 3ch;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.player-table__role {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 700;
+  padding: .1rem .3rem;
+  border-radius: .2rem;
+  margin-right: .3rem;
+}
+
+.player-table__role--s  { background: #7c3aed22; color: #a78bfa; }
+.player-table__role--oh { background: #3b82f622; color: #93c5fd; }
+.player-table__role--op { background: #f9731622; color: #fdba74; }
+.player-table__role--mb { background: #22c55e22; color: #86efac; }
+.player-table__role--l  { background: #f59e0b22; color: #fcd34d; }
+.player-table__role--ds { background: #6b728022; color: #9ca3af; }
+
+.player-table__role-label { font-size: .72rem; color: var(--text-muted); }
+
+/* ─── form-field--checkbox (not in config.css) ─ */
+.form-field--checkbox { flex-direction: row; align-items: center; }
+.form-field--checkbox label {
+  display: flex; align-items: center; gap: .4rem;
+  cursor: pointer; font-size: .85rem; color: var(--text);
+}
+
+/* ─── btn--active (not in config.css) ──────── */
+.btn--active { background: var(--home); color: #fff; border-color: transparent; }
+.btn--active:hover { opacity: .85; }
+
+/* ─── input--readonly ───────────────────────── */
+.input--readonly {
+  color: var(--text-muted);
+  cursor: default;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* ─── vs-label ──────────────────────────────── */
+.vs-label {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-muted);
+  display: block;
+  text-align: center;
+  padding-top: 1.6rem;
+}
