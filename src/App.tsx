@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppStore } from '@/stores/appStore';
+import { checkForUpdate, type UpdateInfo } from '@/lib/updater';
 import { useConfigStore } from '@/stores/configStore';
 import { useNav } from '@/hooks/useNav';
 import { BootstrapWizard } from '@/components/setup/BootstrapWizard';
@@ -21,11 +22,20 @@ export function App() {
   const { isBootstrapped, isLoading, orgId, seasonId, init } = useAppStore();
   const { init: initConfig } = useConfigStore();
   const { view, matchId, navigate, back } = useNav<AppView>();
+  const [update, setUpdate] = useState<UpdateInfo | null>(null);
 
   useEffect(() => { init(); }, [init]);
   useEffect(() => {
     if (orgId) initConfig(orgId, seasonId ?? undefined);
   }, [orgId, seasonId, initConfig]);
+
+  // Check for updates 3 seconds after boot (non-blocking)
+  useEffect(() => {
+    const t = setTimeout(() => {
+      checkForUpdate().then(info => { if (info) setUpdate(info); });
+    }, 3000);
+    return () => clearTimeout(t);
+  }, []);
 
   if (isLoading) return <div className="app-loading">Avvio in corso…</div>;
   if (!isBootstrapped) return <BootstrapWizard />;
@@ -76,6 +86,22 @@ export function App() {
       );
 
     default:
-      return matchListBase;
+      return (
+        <>
+          {update && (
+            <div className="update-banner">
+              <span>🆕 Nuova versione disponibile: <strong>{update.version}</strong></span>
+              <button
+                className="update-banner__btn"
+                onClick={() => window.open(update.releaseUrl, '_blank')}
+              >
+                Scarica
+              </button>
+              <button className="update-banner__close" onClick={() => setUpdate(null)}>✕</button>
+            </div>
+          )}
+          {matchListBase}
+        </>
+      );
   }
 }

@@ -1161,3 +1161,48 @@ kbd {
 .kb-help-key { width: 80px; font-family: var(--font-mono); }
 .kb-help-desc { color: var(--text-muted); }
 .kb-help-footer { margin: 0; font-size: .72rem; color: var(--text-muted); text-align: center; }
+
+/* ─── Update banner ─────────────────────────── */
+.update-banner {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .65rem 1rem;
+  background: #1a3a1a;
+  border: 1px solid #27ae60;
+  border-radius: .5rem;
+  color: #6ee7b7;
+  font-size: .9rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5);
+  animation: slideUp .3s ease;
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+.update-banner__btn {
+  padding: .3rem .9rem;
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  border-radius: .3rem;
+  font-size: .88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity .12s;
+}
+.update-banner__btn:hover { opacity: .85; }
+.update-banner__close {
+  background: transparent;
+  border: none;
+  color: #6ee7b7;
+  cursor: pointer;
+  font-size: .85rem;
+  padding: 0 .15rem;
+  opacity: .7;
+}
+.update-banner__close:hover { opacity: 1; }
